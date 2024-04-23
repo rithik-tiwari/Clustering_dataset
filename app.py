@@ -11,6 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 import plotly.figure_factory as ff
 import plotly.express as px
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.impute import SimpleImputer
 
 def intracluster_analysis(data, cluster_column):
     # Group data by cluster
@@ -63,7 +64,7 @@ if uploaded_file is not None:
 
     ## KDA
     scaler = MinMaxScaler()
-
+    df_features_selected = df_features_selected.dropna()##line added
     numerical_columns = df_features_selected.select_dtypes(include=['int32','int64','float64', 'float32']).columns
     categorical_columns = df_features_selected.select_dtypes(include=['object']).columns
 
