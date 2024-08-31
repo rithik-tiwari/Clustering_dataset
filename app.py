@@ -31,7 +31,7 @@ def intracluster_analysis(data, cluster_column):
         plt.title(f"Distribution of Features in Cluster {cluster}")
         plt.xlabel("Feature Value")
         plt.ylabel("Feature")
-        st.pyplot(fig)
+        st.pyplot(fig)   
 
 
 
@@ -44,7 +44,7 @@ try:
     dataframe = pd.read_csv(uploaded_file)
     dataframe = dataframe.dropna(axis=1, how='all')
     if uploaded_file is not None:
-        st.write(dataframe)
+        st.write(dataframe)   
 except:
     st.write("Please upload a CSV file to continue")
 
@@ -63,7 +63,7 @@ if uploaded_file is not None:
         st.write("Select some columns to proceed")
 
     ## KDA
-    scaler = MinMaxScaler()
+    scaler = MinMaxScaler()     
     df_features_selected = df_features_selected.dropna()##line added
     numerical_columns = df_features_selected.select_dtypes(include=['int32','int64','float64', 'float32']).columns
     categorical_columns = df_features_selected.select_dtypes(include=['object']).columns
@@ -86,7 +86,7 @@ if uploaded_file is not None:
         kmeans_pca_df.rename(columns={0: 'col1'}, inplace=True)
         kmeans_pca_df.rename(columns={1: 'col2'}, inplace=True)
     else:
-        kmeans_pca_df = scaled_kmeans_df
+        kmeans_pca_df = scaled_kmeans_df      
 
     ################################Elbow
 
@@ -99,7 +99,7 @@ if uploaded_file is not None:
         score = silhouette_score(kmeans_pca_df, kmeans.labels_, metric = 'euclidean')
         silhouette_score_lst.append(score)
         inertia_lst.append(kmeans.inertia_)
-        sil_dict[i] = score
+        sil_dict[i] = score      
 
     max_key = max(sil_dict, key=sil_dict.get)
 
